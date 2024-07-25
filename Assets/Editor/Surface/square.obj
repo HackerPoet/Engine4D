@@ -1,0 +1,11 @@
+# Blender v2.91.2 OBJ File: ''
+# www.blender.org
+o Circle
+v 1 0 -1
+v -1 0 -1
+v -1 0 1
+v 1 0 1
+l 2 1
+l 3 2
+l 4 3
+l 1 4
