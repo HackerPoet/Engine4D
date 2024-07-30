@@ -22,7 +22,7 @@ If your game is going to use physics colliders, they need to be initialized when
 
 To handle the lighting and the built-in skybox, there are several global shader variables that need to be initialized. The easiest place to start is using the `SetSkyColors` script from the sample. This script sets the skybox colors, the sun colors, and the directional lighting angles.
 
-Lastly, there needs to be a camera controller to manage all of the cameras and setup rendering for the scene. At a minimum, you can inherit the bare-bones `BasicCamera4D` script to make your own player controller. However, you could also start from the premade `CameraControl4D` class which already takes care of player movement, rotation, physics, and collisions. The sample script `SamplePlayer4D` goes even further to add jumping controls.
+Lastly, there needs to be a camera controller to manage all of the cameras and setup rendering for the scene. At a minimum, you can inherit the bare-bones `BasicCamera4D` script to make your own player controller. However, you could also start from the premade `CameraControl4D` class which already takes care of player movement, rotation, physics, and collisions. The sample script `SamplePlayer4D` goes even further to add jumping controls. In the script, you can control the player's position with `position4D` and the camera's orientation with `camMatrix`.
 
 # Important Editor Addons
 
@@ -42,7 +42,7 @@ Adding a 4D object to a scene is simple. There’s an editor plugin that does it
 
 ### Object4D (always required)
 
-This `Object4D` component adds additional properties to a Unity GameObject to make it 4 dimensional. This includes adding new dimensions for position, rotation, and scaling. All objects that need a 4D transform must have this component, including any parents or children of a 4D object.
+This `Object4D` component adds additional properties to a Unity GameObject to make it 4 dimensional. This includes adding new dimensions for position, rotation, and scaling. All objects that need a 4D transform must have this component, including any parents or children of a 4D object. Engine4D does not support re-parenting during runtime, so all new objects and prefabs must be spawned in the scene's scope without a parent.
 
 Setting an object’s position and scale in 4D is done using Unity’s Transform component for the x, y, and z components plus the extra fields `PositionW` and `scaleW` from `Object4D`. These can all be modified real-time during gameplay or in the editor.
 
@@ -106,6 +106,7 @@ Engine4D comes with some 4D meshes, but you can generate more yourself by using 
 * `GeneratePathExtrude()` \- An extrusion along multiple segments stretched to match the shape of a given path. Similar to the surface of revolution, but more powerful.
 * `GenerateDuoPrism()` \- Creates a 4D mesh from the product of two 2D surfaces.
 * `OFFParser.LoadOFF4D()` \- Load a mesh from a .OFF file ([miratope](https://github.com/galoomba1/miratope-rs/releases/) export). The only supported cell shapes right now are tetrahedra, tetrahedral-bipyramids, and octahedra.
+* `FDOParser.Load4DO()` \- Load a mesh from a .4DO file ([4DO-Specification](https://github.com/HoxelDraw/4DO-Specification)). Only some formats are currently supported.
 
 Once you get your `Mesh4DBuilder` object, there are many things you can do with it, including chaining multiple operations together, such as:
 
@@ -265,6 +266,10 @@ Sometimes you’ll want to write code that works in 4D and 5D. In that case, you
 | `DIMS` | `4` | `5` |
 | `<D>` | `4D` | `5D` |
 | `<D-1>` | `3D` | `4D` |
+
+### Generate 3D Textures
+
+Unlike other assets in the engine, the example textures are not included due to their large size. You can generate them yourself by using `4D > Generate Textures` (this may take a few minutes). These 3D textures can be used with various shaders to create materials for your 4D Game. You can create your own custom textures using the tools I've provided in the `GenerateTextures.cs` script.
 
 ### Generate Groups
 
