@@ -25,11 +25,11 @@ Shader "Custom/CheckerND" {
       #define USE_DITHER
       #define apply_proc_tex4D() \
         float4 checker = floor(i.uv * 3.0 + 0.01); \
-        color.rgb *= 0.9 + 0.2 * frac((checker.x + checker.y + checker.z + checker.w) * 0.5);
+        color.rgb *= 1.0 - 0.1 * frac((checker.x + checker.y + checker.z + checker.w) * 0.5);
       #define apply_proc_tex5D() \
         float4 checker = floor(i.uv * 3.0 + 0.01); \
         float checker_V = floor(i.v_nud.y * 3.0 + 0.01); \
-        color.rgb *= 0.9 + 0.2 * frac((checker.x + checker.y + checker.z + checker.w + checker_V) * 0.5);
+        color.rgb *= 1.0 - 0.1 * frac((checker.x + checker.y + checker.z + checker.w + checker_V) * 0.5);
       #include_with_pragmas "CoreND.cginc"
       ENDCG
     }
