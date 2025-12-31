@@ -25,6 +25,10 @@ public class Mesh4D {
         public Vector4 a;
         public Vector4 b;
         public Vector4 c;
+
+        public override bool Equals(object obj) =>
+            obj is Vector4Triple r && a == r.a && b == r.b && c == r.c;
+        public override int GetHashCode() => System.HashCode.Combine(a, b, c);
     }
     struct Vector4Double {
         public Vector4Double(Vector4 a, Vector4 b) {
@@ -33,6 +37,10 @@ public class Mesh4D {
         }
         public Vector4 a;
         public Vector4 b;
+
+        public override bool Equals(object obj) =>
+            obj is Vector4Double r && a == r.a && b == r.b;
+        public override int GetHashCode() => System.HashCode.Combine(a, b);
     }
     private HashSet<Vector4Triple> shadowHashset = new();
     private HashSet<Vector4Double> wireHashset = new();
